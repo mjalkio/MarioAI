@@ -16,12 +16,19 @@ public class Play {
 
 	public static void main(String[] args) {
 		System.out.println("Yo specify a controller.  Examples:");
-		System.out.println("ch.idsia.ai.agents.human.HumanKeyboardAgent");
 		System.out.println("ch.idsia.ai.agents.ai.ForwardAgent");
 		System.out.println("competition.cig.robinbaumgarten.AStarAgent");
+		System.out.println("Or use 'default' to use your keyboard!");
 		System.out.println();
 		Scanner controllerInput = new Scanner(System.in);
-		Agent controller = AgentsPool.load(controllerInput.next());
+		String input = controllerInput.next();
+		Agent controller;
+		if (input.equals("default")) {
+			controller = AgentsPool
+					.load("ch.idsia.ai.agents.human.HumanKeyboardAgent");
+		} else {
+			controller = AgentsPool.load(input);
+		}
 		controllerInput.close();
 		AgentsPool.addAgent(controller);
 		EvaluationOptions options = new CmdLineOptions(new String[0]);
