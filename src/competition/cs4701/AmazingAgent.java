@@ -76,7 +76,6 @@ public class AmazingAgent extends BasicAIAgent implements Agent {
 
 	public boolean[] getAction(Environment observation) {
 		byte[][] enemies = observation.getEnemiesObservation();
-		byte[][] levelScene = observation.getLevelSceneObservation();
 
 		if (enemyAbove(enemies)) {
 			action[Mario.KEY_JUMP] = false;

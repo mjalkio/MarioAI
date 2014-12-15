@@ -19,7 +19,6 @@ public class Play {
 		System.out.println("ch.idsia.ai.agents.ai.ForwardAgent");
 		System.out.println("competition.cig.robinbaumgarten.AStarAgent");
 		System.out.println("Or use 'default' to use your keyboard!");
-		System.out.println();
 		Scanner controllerInput = new Scanner(System.in);
 		String input = controllerInput.next();
 		Agent controller;
