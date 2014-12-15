@@ -1,0 +1,164 @@
+=== STATISTICS ===
+
+Scoring controller ForwardJumpingAgent with starting seed 3143
+Difficulty 0 score 10660.1807 (avg time 0.0095)
+Difficulty 3 score 2170.1930 (avg time 0.0021)
+Difficulty 5 score 1994.1640 (avg time 0.0004)
+Difficulty 10 score 1137.4291 (avg time 0.0000)
+Competition score: 15961.96674194336
+Total kills Sum = 71
+marioStatus Sum  = 9
+timeLeft Sum = 6611
+marioMode Sum = 32
+TOTAL SUM for ForwardJumpingAgent = 22684.96674194336
+
+Scoring controller ForwardJumpingAgent2 with starting seed 3143
+Difficulty 0 score 8186.1952 (avg time 0.0115)
+Difficulty 3 score 1859.1045 (avg time 0.0020)
+Difficulty 5 score 1605.3015 (avg time 0.0009)
+Difficulty 10 score 1158.6832 (avg time 0.0043)
+Competition score: 12809.284301757812
+Total kills Sum = 60
+marioStatus Sum  = 8
+timeLeft Sum = 6470
+marioMode Sum = 31
+TOTAL SUM for ForwardJumpingAgent2 = 19378.284301757812
+
+Scoring controller MatthewErickson_GPAgent0619 with starting seed 3143
+Difficulty 0 score 11108.5305 (avg time 0.0359)
+Difficulty 3 score 2404.5201 (avg time 0.0163)
+Difficulty 5 score 1397.8931 (avg time 0.0132)
+Difficulty 10 score 1024.2333 (avg time 0.0156)
+Competition score: 15935.176930236817
+Total kills Sum = 99
+marioStatus Sum  = 10
+timeLeft Sum = 6009
+marioMode Sum = 46
+TOTAL SUM for MatthewErickson_GPAgent0619 = 22099.17693023682
+
+Scoring controller TrondEllingsen_LuckyAgent with starting seed 3143
+Difficulty 0 score 11369.8691 (avg time 0.0502)
+Difficulty 3 score 6555.2201 (avg time 0.0423)
+Difficulty 5 score 3130.1835 (avg time 0.0277)
+Difficulty 10 score 3291.9173 (avg time 0.0285)
+Competition score: 24347.1900390625
+Total kills Sum = 228
+marioStatus Sum  = 12
+timeLeft Sum = 4968
+marioMode Sum = 19
+TOTAL SUM for TrondEllingsen_LuckyAgent = 29574.1900390625
+
+Scoring controller AStarAgent with starting seed 3143
+Difficulty 0 score 11628.8000 (avg time 0.4118)
+Difficulty 3 score 11611.2000 (avg time 0.5855)
+Difficulty 5 score 11651.2000 (avg time 0.6569)
+Difficulty 10 score 11619.2000 (avg time 0.9181)
+Competition score: 46510.399999999994
+Total kills Sum = 414
+marioStatus Sum  = 40
+timeLeft Sum = 4730
+marioMode Sum = 80
+TOTAL SUM for AStarAgent = 51774.399999999994
+
+Scoring controller AmazingAgent with starting seed 3143
+Difficulty 0 score 10919.0389 (avg time 0.0217)
+Difficulty 3 score 3540.5170 (avg time 0.0110)
+Difficulty 5 score 1826.3706 (avg time 0.0130)
+Difficulty 10 score 1096.5354 (avg time 0.0103)
+Competition score: 17382.461822509766
+Total kills Sum = 43
+marioStatus Sum  = 11
+timeLeft Sum = 6321
+marioMode Sum = 28
+TOTAL SUM for AmazingAgent = 23785.461822509766
+
+=== MICHAEL’S COMMENTS ===
+
+FORWARDJUMPINGAGENT
+Difficulty 00
+- Seems like a fairly good AI
+- Enemies are only goombas and flower guys s one rarely dies on them
+- No gaps
+- Just seems “sloppy”
+- Misses out on opportunities for power ups, it could survive some situations with them
+
+Difficulty 03
+- By now the gaps become his biggest issue
+- Enemies don’t help either
+
+Difficulty 05
+- Spikey shells start showing up more
+- Every once and a while it still looks amazing :P
+
+
+FORWARDJUMPINGAGENT2
+Takeaway: Super simple improvements are hard!
+
+Difficulty 00
+- Goes back sometimes when it runs against something
+- Unclear whether how helpful this actually is
+- At least one situation where it got caught jumping against a wall
+	- This was a very rare occurrence, and seemed to require things being at exactly 
+		the worst positions >.<
+
+Difficulty 03
+- Saw at least one case where its new behavior put it in the path of a bullet :(
+- And an enemy he had already avoided
+- Does not seem to do what we wanted him to do , this is an action that requires a lot of control
+
+Difficulty 05
+- More things to jump off and more gaps leads this to get more dangerous :(
+
+GP Agent
+Note to self: Look into its methodology
+
+Difficulty 0
+- Best part is how much it spams the buttons
+- Also seems to have similar behavior to forward jumping
+- It has learned to wait for flower enemies (no matter the distance)
+- It is also much better at killing enemies (with fire and jumping)
+
+Difficulty 3
+- It gets stuck behind a pipe :(
+	- Because it doesn’t hold the jump button
+- Gaps are still a killer! It doesn’t seem to consider them.
+
+Difficulty 10
+- Mario gets stuck (screenshot)
+
+Rule Based Agent
+Note to self: analyze 
+Difficulty 0
+- Love how it hits walls before it jumps
+- It plays it safe in a way none of the other agents do
+- Will sometimes stop before a dangerous jump
+- Never breaks bricks! (why not get mushrooms/flowers?)
+	- Might still be a calculated decision
+
+Difficulty 3
+- Saw Mario waiting under a ledge, enemy fell on top
+- Doesn’t appear to be smart enough to not jump on spiky turtles
+- Aside: it’s weird that none of those duck
+
+Difficulty 5
+- This thing is the master of edges
+	- Fits on the pipe with the flower guy
+
+Difficulty 10
+- Bullet bills from behind are a major issue
+
+AStar Agent
+Difficulty 0
+- Yes it fucking dominates everything
+
+Amazing Agent (ours)
+Note to self again: I am dumb, they reset speed because it shoots fireball
+
+Difficulty 0
+- Basically forward jumping
+- Doesn’t jump into the plants!
+
+Difficulty 3
+- Crap when it catches a shell it stops! (second trial)
+- Gets caught by bullets from behind :(
+- But overall the stopping for enemies seems to be helpful!
