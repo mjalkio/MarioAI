@@ -61,16 +61,16 @@ marioMode Sum = 80
 TOTAL SUM for AStarAgent = 51774.399999999994
 
 Scoring controller AmazingAgent with starting seed 3143
-Difficulty 0 score 10919.0389 (avg time 0.0217)
-Difficulty 3 score 3540.5170 (avg time 0.0110)
-Difficulty 5 score 1826.3706 (avg time 0.0130)
-Difficulty 10 score 1096.5354 (avg time 0.0103)
-Competition score: 17382.461822509766
-Total kills Sum = 43
-marioStatus Sum  = 11
-timeLeft Sum = 6321
-marioMode Sum = 28
-TOTAL SUM for AmazingAgent = 23785.461822509766
+Difficulty 0 score 11267.4377 (avg time 0.0268)
+Difficulty 3 score 3103.8009 (avg time 0.0074)
+Difficulty 5 score 2741.9777 (avg time 0.0053)
+Difficulty 10 score 1199.3357 (avg time 0.0046)
+Competition score: 18312.552001953125
+Total kills Sum = 83
+marioStatus Sum  = 10
+timeLeft Sum = 6035
+marioMode Sum = 21
+TOTAL SUM for AmazingAgent = 24461.552001953125
 
 === MICHAEL’S COMMENTS ===
 

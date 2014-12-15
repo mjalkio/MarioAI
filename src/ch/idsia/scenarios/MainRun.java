@@ -63,13 +63,13 @@ public class MainRun {
 			// to the name of desired agent.
 			calledBefore = true;
 			// addAgentToThePool
+			AgentsPool.addAgent(new AmazingAgent());
 			AgentsPool.addAgent(new ForwardJumpingAgent());
 			AgentsPool.addAgent(new ForwardJumpingAgent2());
 			AgentsPool
 					.addAgent("/Users/michael/Documents/Eclipse/MarioAI/src/competition/cig/matthewerickson/matthewerickson.xml");
 			AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
 			AgentsPool.addAgent(new AStarAgent());
-			AgentsPool.addAgent(new AmazingAgent());
 		}
 	}
 
@@ -88,7 +88,7 @@ public class MainRun {
 		options.setVisualization(useGUI);
 		options.setNumberOfTrials(numberOfTrials);
 
-		System.out.println("\nScoring controller " + agent.getName()
+		System.out.println("Scoring controller " + agent.getName()
 				+ " with starting seed " + startingSeed);
 
 		double competitionScore = 0;
@@ -116,6 +116,7 @@ public class MainRun {
 						+ " = "
 						+ (competitionScore + killsSum + marioStatusSum
 								+ marioModeSum + timeLeftSum));
+		System.out.println();
 	}
 
 	public static double testConfig(TimingAgent controller,

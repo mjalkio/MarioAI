@@ -20,18 +20,6 @@ public class AmazingAgent extends BasicAIAgent implements Agent {
 		action[Mario.KEY_SPEED] = true;
 	}
 
-	private boolean enemyBelow(byte[][] enemies) {
-		for (int x = 12; x < 17; ++x) {
-			for (int y = 12; y < 22; ++y) {
-				if (enemies[y][x] != 0) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
 	private boolean enemyAbove(byte[][] enemies) {
 		for (int y = 10; y > 5; --y) {
 			for (int x = 11; x < 15; ++x) {
@@ -47,32 +35,11 @@ public class AmazingAgent extends BasicAIAgent implements Agent {
 	private boolean enemyInFront(byte[][] enemies) {
 		for (int y = 12; y > 9; --y) {
 			for (int x = 11; x < 13; ++x) {
-				if (enemies[y][x] != 0) {
+				if (enemies[y][x] != 0 && enemies[y][x] != 13) {
 					return true;
 				}
 			}
 		}
-		return false;
-	}
-
-	private boolean gapAhead(byte[][] levelScene) {
-		int y = 12;
-		boolean gapDetected;
-
-		for (int x = 15; x < 18; ++x) {
-			if (levelScene[y][x] == 0) {
-				gapDetected = true;
-				for (int s = y; s < 22; ++s) {
-					if (levelScene[s][x] != 0) {
-						gapDetected = false;
-					}
-				}
-				if (gapDetected) {
-					return true;
-				}
-			}
-		}
-
 		return false;
 	}
 
@@ -96,11 +63,15 @@ public class AmazingAgent extends BasicAIAgent implements Agent {
 		} else {
 			action[Mario.KEY_JUMP] = observation.mayMarioJump()
 					|| !observation.isMarioOnGround();
+			action[Mario.KEY_SPEED] = observation.mayMarioJump()
+					|| !observation.isMarioOnGround();
 			action[Mario.KEY_RIGHT] = true;
 		}
 
 		if (timeInSameSpot > 75) {
 			action[Mario.KEY_JUMP] = observation.mayMarioJump()
+					|| !observation.isMarioOnGround();
+			action[Mario.KEY_SPEED] = observation.mayMarioJump()
 					|| !observation.isMarioOnGround();
 			action[Mario.KEY_RIGHT] = true;
 		}
