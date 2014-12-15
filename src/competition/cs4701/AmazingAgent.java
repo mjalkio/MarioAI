@@ -6,6 +6,8 @@ import ch.idsia.mario.engine.sprites.Mario;
 import ch.idsia.mario.environments.Environment;
 
 public class AmazingAgent extends BasicAIAgent implements Agent {
+	private float previousMarioX;
+	private int timeInSameSpot;
 
 	public AmazingAgent() {
 		super("AmazingAgent");
@@ -76,6 +78,14 @@ public class AmazingAgent extends BasicAIAgent implements Agent {
 
 	public boolean[] getAction(Environment observation) {
 		byte[][] enemies = observation.getEnemiesObservation();
+		float marioXpos = observation.getMarioFloatPos()[0];
+
+		if (marioXpos == previousMarioX) {
+			timeInSameSpot++;
+		} else {
+			previousMarioX = marioXpos;
+			timeInSameSpot = 0;
+		}
 
 		if (enemyAbove(enemies)) {
 			action[Mario.KEY_JUMP] = false;
@@ -84,6 +94,12 @@ public class AmazingAgent extends BasicAIAgent implements Agent {
 			action[Mario.KEY_RIGHT] = false;
 			action[Mario.KEY_JUMP] = true;
 		} else {
+			action[Mario.KEY_JUMP] = observation.mayMarioJump()
+					|| !observation.isMarioOnGround();
+			action[Mario.KEY_RIGHT] = true;
+		}
+
+		if (timeInSameSpot > 75) {
 			action[Mario.KEY_JUMP] = observation.mayMarioJump()
 					|| !observation.isMarioOnGround();
 			action[Mario.KEY_RIGHT] = true;
