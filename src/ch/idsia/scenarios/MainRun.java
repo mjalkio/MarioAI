@@ -17,6 +17,7 @@ import ch.idsia.utils.StatisticalSummary;
 import competition.cig.robinbaumgarten.AStarAgent;
 import competition.cig.trondellingsen.TrondEllingsen_LuckyAgent;
 import competition.cs4701.AmazingAgent;
+import competition.cs4701.ForwardJumpingAgent2;
 
 /**
  * Created by IntelliJ IDEA. User: Sergey Karakovskiy, firstName_at_idsia_dot_ch
@@ -62,10 +63,11 @@ public class MainRun {
 			// to the name of desired agent.
 			calledBefore = true;
 			// addAgentToThePool
-			AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
+			AgentsPool.addAgent(new ForwardJumpingAgent());
+			AgentsPool.addAgent(new ForwardJumpingAgent2());
 			AgentsPool
 					.addAgent("/Users/michael/Documents/Eclipse/MarioAI/src/competition/cig/matthewerickson/matthewerickson.xml");
-			AgentsPool.addAgent(new ForwardJumpingAgent());
+			AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
 			AgentsPool.addAgent(new AStarAgent());
 			AgentsPool.addAgent(new AmazingAgent());
 		}
@@ -84,7 +86,8 @@ public class MainRun {
 		EvaluationOptions options = cmdLineOptions;
 
 		options.setVisualization(useGUI);
-		// options.setMaxFPS(true);
+		options.setNumberOfTrials(numberOfTrials);
+
 		System.out.println("\nScoring controller " + agent.getName()
 				+ " with starting seed " + startingSeed);
 
@@ -142,7 +145,7 @@ public class MainRun {
 		int marioStatus = 0;
 
 		options.resetCurrentTrial();
-		for (int i = 0; i < numberOfTrials; i++) {
+		for (int i = 0; i < options.getNumberOfTrials(); i++) {
 			options.setLevelRandSeed(seed + i);
 			options.setLevelLength(200 + (i * 128) + (seed % (i + 1)));
 			options.setLevelType(i % 3);
