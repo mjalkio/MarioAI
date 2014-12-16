@@ -23,7 +23,14 @@
 \maketitle
 
 \section * {Abstract}
-This paper utilizes the Mario AI benchmark, to describe the success of both previously implemented Mario bots compared to our own implementation. The Mario AI Benchmark was introduced for use first in the IEEE Games Innovation Conference (ICE-GIC) and then later in Computational Intelligence Games (CIG) as a benchmark for reinforcement learning algorithms and other game AI techniques in a public domain clone of the platform game {\it Super Mario Bros}. Each year the CIG conducts a Mario AI Competition, in which they compare contestants submitted Mario bots to this benchmark. The goal of this paper is to determine the success of bots that were already created for this competition and then to decide whether an improved bot can be created. The bots that will be evaluated fell into three categories in the competitions A*-based, learning-based, and rule-based implementations.
+This paper utilizes the Mario AI benchmark, to describe the success of both previously implemented Mario bots 
+compared to our own implementation. The Mario AI Benchmark was introduced for use first in the IEEE Games 
+Innovation Conference (ICE-GIC) and then later in Computational Intelligence Games (CIG) as a benchmark for 
+reinforcement learning algorithms and other game AI techniques in a public domain clone of the platform game {\it 
+Super Mario Bros}. Each year the CIG conducts a Mario AI Competition, in which they compare contestants 
+submitted Mario bots to this benchmark. The goal of this paper is to determine the success of bots that were already 
+created for this competition and then to decide whether an improved bot can be created. The bots that will be 
+evaluated fell into three categories in the competitions A*-based, learning-based, and rule-based implementations.
 
 \setlength{\columnsep}{.65cm}
 \begin{multicols}{2}
@@ -64,7 +71,22 @@ approximately $19 * 19$ cells.
 
 The entries for the 2009 Mario AI competition were classified into three broad categories, hard-coded heuristic, 
 learning-based, and A*-based controllers. Hard-coded heuristics were the largest category, comprised of seven 
-different controllers which were hand-constructed, non-adaptive, and did not use search-based methods for action selection. Learning based controllers were the second largest category comprised of two subcategories artificial evolution. There were three entries, the first used expression trees commonly used in genetic programming, the second evolved code for a stack-based virtual machine, and the third evolved a rule-based controller. The A*-based controllers were the most successful entries in the competition
+different controllers which were hand-constructed, non-adaptive, and did not use search-based methods for action 
+selection. Learning based controllers were the second largest category comprised of two subcategories artificial 
+evolution. There were three entries, the first used expression trees commonly used in genetic programming, the 
+second evolved code for a stack-based virtual machine, and the third evolved a rule-based controller. The A*-based 
+controllers were the most successful entries in the competition, beating the other controllers by a huge margin.
+
+The success of the A*-based controllers over all other categories was considered by those running the competition 
+to be a shortcoming, so in the 2010 Mario AI competition the level generator was expanded to include the possibility 
+of generating dead ends. A dead end is defined as a situation where the player can choose one of two paths when 
+moving forward, but at least one of the paths is blocked. This requires the player to backtrack and choose another 
+path. Additionally, a number of other changes were made to the level generator in order to create harder levels. 
+Some of the features introduced included greater control over numbers of items, the possibility of hidden blocks, and 
+longer gaps. The difficulty was also increased for the hardest levels and some were literally impossible to finish. This 
+allowed for the behaviors of various controllers to be tested in this difficult environment.
+
+The 2010 championship allowed for both new and old competitors to enter, and there was a vast improvement in scores compared to the previous year.
 
 \section * {Analysis of Agents}
 We analyzed six different agents for this paper.  The first is the basic ForwardJumpingAgent which 
@@ -89,7 +111,7 @@ situations that they do not perform well in.  A table of our quantitative result
 \resizebox{\textwidth}{!}{ 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-Controller & D0      & D3      & D5      & D10     & Score   & Total Kills & Mario Status & Time Left & Mario Mode & Total Sum \\ \hline
+Controller & D0      & D3      & D5      & D10     & Score   & Total Kills & Status & Time Left & Mode & Total \\ \hline
 FJ         & 10660.2 & 2170.2  & 1994.2  & 1137.4  & 15962.0 & 71          & 9            & 6611      & 32         &     22685.0      \\ \hline
 FJ2        & 8186.2  & 1859.1  & 1605.3  & 1158.7  & 12809.3 & 60          & 8            & 6470      & 31         & 19378.3   \\ \hline
 GP         & 11108.5 & 2404.5  & 1397.9  & 1024.2  & 15935.2 & 99          & 10           & 6009      & 46         & 22099.2   \\ \hline
@@ -101,7 +123,12 @@ Amazing    & 11267.4 & 3103.8  & 2742.0  & 1199.3  & 18312.6 & 83          & 10 
 \caption*{\footnotesize Controller Scores}
 \end{table}
 \vspace{-3ex}
-\textsc{\scriptsize Results of our run of the various bots against our own controller titled amazing agent. explanation of column labels: fj: forward jumping, gp: genetic programming, rb: rule-base, A*: a-star search, amazing: our implemented agent (amazing agent), D0...D5: score at difficulty 0...5 respectively based on progress, score: sum of all the difficulties, mario status: number of levels completed, time left: sum of time remaining after each level, mario mode: sum of abilities that mario has at the end of each level, total: total score based on progress, kills, and time taken (used to calculate winner)}
+\textsc{\scriptsize Results of our run of the various bots against our own controller titled amazing agent. explanation 
+of column labels: fj: forward jumping, gp: genetic programming, rb: rule-base, A*: a-star search, amazing: our 
+implemented agent (amazing agent), D0...D5: score at difficulty 0...5 respectively based on progress, score: sum of 
+all the difficulties, status: number of levels completed, time left: sum of time remaining after each level, mode: sum of 
+abilities that mario has at the end of each level, total: total score based on progress, kills, and time taken (used to 
+calculate winner)}
 \end{center}
 
 \begin{multicols*}{2}
