@@ -276,7 +276,7 @@ it can.  Surprisingly, this simple heuristic is enough to do fairly well on the 
 What is interesting is how good this agent appears to a human observer.  Because the agent 
 is able to jump at the soonest possible moment every time, it seems to be acting with a 
 superhuman reaction time.  It does well because jumping in Mario is a very useful ability.  For 
-most enemy types, jumping prevent Mario from being hit and also kill the enemy.  Jumping is the 
+most enemy types, jumping prevents Mario from being hit and also kills the enemy.  Jumping is the 
 only way for Mario to traverse gaps.  It's also his only way to get over walls.  In the early levels that 
 most of our agents are successful in, there are more safe spaces than danger zones, so just 
 jumping quickly through the levels works.
@@ -410,7 +410,7 @@ There have been some complaints online\footnote{
 https://www.youtube.com/watch?v=j7ckTMLIwpE} 
 about Robin Baumgarten's solution, with the belief that 
 he broke the rules or spirit of the competition.  The competition required that Mario only use the 
-Environment object to observe his surroundings.  He is not supposed to be able to look at the game 
+Environment interface to observe his surroundings.  He is not supposed to be able to look at the game 
 engine itself to make decisions, as he would then be operating with perfect knowledge.  
 Baumgarten's solution gets around this rule by copying over all of the engine code into his own 
 solution.  He then calls his version of the engine a ``simulator,'' and in order to make decisions 
@@ -423,6 +423,39 @@ but still fails to complete
 two levels.  Occasional mistakes should almost be expected in such a complex game, but 
 Baumgarten's agent does not make them!  It really goes to show that fairly basic search algorithms 
 can be applied to a variety of situations.
+
+\section *{Conclusion}
+After watching the qualitative results of each agent, we see a lot of commonality between all of the agents that 
+utilize the environment interface and a large amount of improvement that could occur. The biggest shortcomings of the
+agents were the fact that no real ``strategy" was implemented for the complex situations and combinations of obstacles that 
+we would expect from a human player. Basic strategies, such as ``run right and jump all the time" or ``don't jump up into enemies" 
+were implemented with varying degrees of success, but gaps still produced quite a challenge for must rule-based or learning algorithms
+and were pretty much only solved by agents with very precise path finding algorithms that understood the physics of the engine. 
+
+Most of the hard-coded rule based logic worked well for easier levels, but typically any advantage from these implementations 
+meant little on more complex levels, where they tended to show little to no (and sometimes negative) effect over 
+the simple ForwardJumpingAgent. We concluded that while lower-complexity Mario levels can be well understood by 
+learning algorithms and can be well planned for by human-written hard-coded rule based algorithms, higher complexity levels
+tended to essentially be filled with corner cases, as the sheer density of enemies and obstacles almost guaranteed that Mario would face multiple
+challenges per action and per grid coordinate. Because of the vast number of possible corner cases and their relative rarity, few of the algorithms
+were able to account for them and thus most of them regressed to simple strategies for completing the game, such as running forward and jumping
+mindlessly. While it would certainly be possible for a learning agent to develop strategies for many of these cases (or even refine generalized strategies
+that could be more widely applicable on complex levels), none of the algorithms submitted had the development computation put into them to have
+accounted for these complexities. However, we do see hope for learning algorithms if we qualitatively analyze the learning portion of the competitions, 
+where on the 10,001th iteration some learning algorithms outperformed A* algorithms. Therefore, we can conclude that while it is possible for learning 
+algorithms to beat Mario, it requires an enormous amount of computation time, and A* algorithms are efficient enough to make the difference in score and 
+performance negligible and inefficient based on the high cost of learning algorithms.
+
+Finally, we conclude that it would be nearly impossible to hard-code rule-based algorithms that could handle the vast amount of complexity with the finesse of 
+A* without using some sort of intelligent path-finding algorithm to account for the complexity of the trajectories that are required of the higher levels. Because of
+this stringent requirement for Mario to have superhuman guidance, no reasonably manageable rule based algorithm could implement a comparable solution without
+implementing path finding algorithms, so in order to improve upon A* algorithms with rule-based logic, one would need to created a ``rule-logic augmented A*" algorithm.
+
+Our agent, for its category, complexity, and efficiency performed reasonably well. ForwardJumpingAgent, the agent upon which AmazingAgent was based, was remarkably
+successful and navigated levels much more effectively than many of the learning algorithms, presumably because the learning algorithms did not even have the computation 
+time to learn the basics that ForwardJumpingAgent was based on (i.e. it's better to run forward and jump a lot). Our modifications and rule-based logic avoided some of the common
+pitfalls that ForwardJumpingAgent succumbed to and therefore outperformed it on earlier levels, but was eventually hurt by corner cases in more complex levels that
+hurt overall performance.
 
 \end{multicols*}
 
