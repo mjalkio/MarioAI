@@ -114,7 +114,24 @@ can be killed by fireballs and can be jumped on are all classified the same) and
 Finally, the environment interface contained information about Mario's current state, including his mode (small, big, or fire), if he is on the ground, if he can jump, 
 and if he is carrying a Koopa shell. Functionality for processing a raw bitmap image of the screen at each discrete time step was implemented but was not used by any AI routine.
 
+The agent interface was to be implemented with the AI source code and controlled mario in each game. In order to understand the functionality of this interface we 
+must first discuss the functionality of Mario himself. The original Nintendo had six inputs: four directional inputs and two miscellaneous buttons, A and B. 
+In \textit{Super Mario Bros} and consequently in \textit{Infinite Mario Bros}, the ``up" button on the directional pad was not used and its intuitive functionality, 
+the ``jump" command, was assigned to one of the two miscellaneous buttons. The other miscellaneous button was used to activate sprint and fire a fireball 
+when Mario was in fire mode. The left and right directions on the directional pad move Mario left and right respectively, and the down button on the directional 
+pad makes him crouch down. 
 
+The agent interface calls the method \textit{getAction} at every discrete time step, in the case of simulated time every 40ms. 
+The method takes an environment as input (the current game environment) and returns a  five-bit array of actions, one for each of the 
+five used buttons as ``pressed" or ``not pressed". Buttons may be pressed simultaneously pressed, so there are therefore \(2^5 = 32\) 
+actions that may be taken by the agent. While several of the elements in action space are pointless, not used, or rarely used (such as 
+``left" and ``right" simultaneously which is meaningless, or ``jump" and ``crouch" which is a discrete action but rarely used). 
+
+The combination of random level generation with certain complexities (such as dead ends that cannot be distinguished from regular levels upon 
+entering but eventually requiring backtracking), the massive environment state space, and the relatively large action space makes for a very interesting 
+AI problem that, as we will see, is not easily solved by pure computation. Rather, there are certain strategies that maximize survival and point collecting that are not
+ quickly or effectively learned by learning agents and can be somewhat easily integrated into heuristic or rule-based algorithms.
+ 
 \section * {Analysis of Agents}
 We analyzed six different agents for this paper.  The first is the basic ForwardJumpingAgent which 
 was a sample agent provided by the benchmark.  Three of the agents are the best agents within
