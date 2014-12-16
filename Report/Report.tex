@@ -107,9 +107,34 @@ Amazing    & 11267.4 & 3103.8  & 2742.0  & 1199.3  & 18312.6 & 83          & 10 
 We will analyze the agents in the order of their score from the worst to the best.
 \subsection*{ForwardJumpingAgent2}
 The goal of ForwardJumpingAgent2 was to solve a problem faced by the original 
-ForwardJumpingAgent: falling into holes.  In this version of Mario it is possible to jump off of walls, 
-so in some situations when you're falling down a hole it's possible to to within the hole and free 
+ForwardJumpingAgent: falling into gaps.  In this version of Mario it is possible to jump off of walls, 
+so in some situations when you're falling down a gap it's possible to jump within the gap and free 
 yourself.
+
+ForwardJumpingAgent2 always keeps track of Mario's position on the x-axis and if it stays in the 
+same position for a short time (signifying that it might be stuck against a wall) it attempts to jump left.  
+Then if it finds itself falling for a short time again it assumes that it's on the other wall and tries to jump 
+right.  When it isn't falling into this pattern, ForwardJumpingAgent2 follows the same behavior as 
+the normal ForwardJumpingAgent.
+
+What we found when scoring this agent was that it actually performed worse than 
+ForwardJumpingAgent.  It completed only 8 levels (ForwardJumpingAgent completed 9), and 
+traveled a shorter distance on average at all difficulty levels other than the hardest difficulty.
+
+There were two main issues with this agent.  The first problem was that we misjudged how 
+jumping off walls could help an agent.  While the ForwardJumpingAgent fell into gaps a lot, 
+it very rarely fell onto the far wall within a gap.  In fact, while watching ForwardJumpingAgent2 it was 
+never able to save itself from a gap, so it failed at its main purpose.
+
+The other issue was that jumping off walls actually hurt the agent in many cases.  The most common 
+case was that the agent would fail to make it over a wall in the environment on its first try, would jump 
+left, and then would have to try to jump over the wall again.  In at least one case that was observed the 
+agent failed to ever make it over the wall, and fell into that loop until it timed out.  In other cases the 
+agent was hit by a bullet that was able to catch up to it, the agent jumped into an enemy that it had 
+already passed, and the agent even jumped into gaps that it had already passed.
+
+Overall, this naive attempt at an improvement was a failure.  We discovered that making ``small'' 
+improvements to an agent can be more difficult than expected.
 \end{multicols*}
 
 \end{document}
