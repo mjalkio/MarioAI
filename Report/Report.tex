@@ -84,5 +84,34 @@ Amazing    & 11267.4 & 3103.8  & 2742.0  & 1199.3  & 18312.6 & 83          & 10 
 \caption{Controller Scores}
 \end{table}
 Results of our run of the various bots and the 
+\begin{multicols*}{2}
+\section * {The Environment and State Space}
+As stated above, the environment was based on Markus Persson's \textit{Infinite Mario Bros} which is an online,
+public domain clone of Nintendo's classic \textit{Super Mario Bros} with open-source Java code. \textit{Infinite Mario Bros}
+was primarily designed to be human-playable as an entertaining game, so many of the features of the source were incompatible 
+or inconvenient for AI integration. Therefore, Karakovskiy et al. edited the \textit{Infinite Mario Bros} source to include an 
+API that allowed interfacing with AI code, removing dependency on graphics output and the system clock to allow simulations 
+to be run computationally and not graphically, with a temporal step size in simulated time of 40ms (25 Hz). 
+The source was also extensively modified to include a more sophisticated level-generation class which allowed for both 
+more complex levels than were available before and the ability to recreate levels using each level's seed. Karakovskiy et al. 
+also added a significant number of parameters for level design that allowed programmers to specify certain aspects of each level, 
+such as an enemy mask which determined the presence of various types of enemies, difficulty, length, and the frequency of dead 
+ends that require backtracking (dead ends were not originally included in \textit{Infinite Mario Bros}). Their final software resulted in a 
+cross-platform Java program that ran on a single thread and had low computation times for standard desktop machines of the time 
+(they quote an estimate of order 10 levels per second on a 2009 MacBook with most of the computation time being used by the 
+agents and not by the game simulation software).
+
+The API consisted of two main interfaces and a ``Task" analysis interface. The benchmark software provides the environment interface 
+to the AI which includes all the information available to it in-game. The environment is classified in a $22 * 22$ ``block" grid, with each block 
+taking up a significant amount of pixel space. In each block, there were binary fields for passible/impassible terrain and for the presence of enemies. 
+Because block coordinates were far too inaccurate for sufficient path calculations, the designers implemented exact (pixel space) coordinates for 
+enemies in order to allow AI consoles the accuracy of human perception. Zoom levels were introduced that give the AI more detailed information about the 
+state space, including levels of detail that distinguish all necessary details but don't distinguish between functionally equivalent enemies (for instance, enemies that 
+can be killed by fireballs and can be jumped on are all classified the same) and a full zoom level that gives the AI the level of detail that the engine has access to.
+Finally, the environment interface contained information about Mario's current state, including his mode (small, big, or fire), if he is on the ground, if he can jump, 
+and if he is carrying a Koopa shell. Functionality for processing a raw bitmap image of the screen at each discrete time step was implemented but was not used by any AI routine.
+
+
+\end{multicols*}
 
 \end{document}
