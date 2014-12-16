@@ -32,5 +32,7 @@ public class Play {
 			options.setLevelLength((i + 1) * 300);
 			System.out.println("Score: " + task.evaluate(controller)[0]);
 		}
+
+		System.exit(0);
 	}
 }
