@@ -30,13 +30,13 @@
 \vspace{-4.5ex}
 
 \section * {Abstract}
-This paper utilizes the Mario AI benchmark, to describe the success of both previously implemented Mario bots 
+This paper utilizes the Mario AI benchmark\footnote{http://julian.togelius.com/Togelius2010The.pdf}, to examine the success of both previously implemented Mario agents 
 compared to our own implementation. The Mario AI Benchmark was introduced for use first in the IEEE Games 
-Innovation Conference (ICE-GIC) and then later in Computational Intelligence Games (CIG) as a benchmark for 
+Innovation Conference (ICE-GIC) and then later in the IEEE Conference on Computational Intelligence and Games (CIG) as a benchmark for 
 reinforcement learning algorithms and other game AI techniques in a public domain clone of the platform game {\it 
 Super Mario Bros}. Each year the CIG conducts a Mario AI Competition, in which they compare contestants 
-submitted Mario bots to this benchmark. The goal of this paper is to determine the success of bots that were already 
-created for this competition and then to decide whether an improved bot can be created. The bots that will be 
+submitted Mario agents using this benchmark. The goal of this paper is to determine the success of bots that were already 
+created for this competition and then to decide whether an improved agent can be created. The bots that will be 
 evaluated fell into three categories in the competitions A*-based, learning-based, and rule-based implementations.
 
 \setlength{\columnsep}{.65cm}
@@ -46,19 +46,24 @@ A platform game, or platformer, is a video game which involves guiding an avatar
 platforms, over obstacles, or both in order to advance the game. These challenges are known as jumping puzzles 
 or freerunning. It is the job of the player to control the jumps in order to avoid letting their avatar fall from the 
 platforms or miss the necessary jumps. The most common element of the genre of platform games is the jump 
-button. Platform games originated in the early 1980s in side scrolling or 2D video games, which were eventually 
+button, which you use to control your avatar along with directional movement buttons. Platform games originated in the early 1980s in side scrolling or 2D video games, which were eventually 
 followed by 3D successors in the mid-1990s.
 
-Super Mario Bros is a series of platform video games created by Nintendo, featuring the main character Mario who 
-serves as the player's avatar. The game follows Mario's adventures in the fictional Mushroom Kingdom, where he 
+\textit {Super Mario Bros} is a series of platform video games created by Nintendo, featuring the main character Mario who 
+serves as the player's avatar. 
+Mario is undeniably the most recognizable character in video games, and platformers featuring him 
+are all very critically acclaimed.  
+The game follows Mario's adventures in the fictional Mushroom Kingdom, where he 
 runs and jumps across platforms and atop enemies in themed levels. In the game it is necessary for Mario to jump 
-over enemies and between platforms. It is also beneficial to Mario to jump on enemies in order to prevent them 
+over enemies and between platforms. It is also beneficial to Mario to jump on enemies, which eliminates them, in order to prevent them 
 from coming across his path again, provided that they do not have spiked turtle shells. Aside from staying alive and 
 progressing towards the finish line, it is also beneficial to the player's score for Mario to collect coins by jumping 
 into them as they are found in the level, as well as by jumping into bricks for coins that may be hidden. There are 
 also a multitude of power-ups and items which give Mario special powers such as fireball-throwing, size-changing, 
 and extra lives, which can also be found by jumping into bricks.
 
+The Mario AI benchmark used for the various competitions is based on an open source 
+Java implementation of Mario called \textit{Infinite Mario Bros}.  
 In order to make the benchmark possible the game was modified via the construction of an API that enabled it to be 
 easily interfaced with learning algorithms and the various competitors' controllers. The modifications included the 
 removal of the dependency on the system clock so that the learning algorithm can ``step" forward, removing the 
@@ -68,13 +73,12 @@ receives a description of the environment, and outputs an action. The software t
 possible is a single threaded Java application, which allows for the key methods that a controller needs to 
 implement to be specified in a single Java interface file.
 
-There are many features that make \textit {Super Mario Bros} or platformers in general particularly interesting from 
+There are many features that make \textit {Super Mario Bros}, and platformers in general, particularly interesting from 
 an artificial intelligence or reinforcement learning perspective. What is likely the most important feature of the game 
-is its potentially very rich and high-dimensional environment representation. When a human player views the 
-game, he views a small part of the current level in two dimensions, with the screen centered on Mario. There are 
-very rarely sparse views, in most cases there are dozens of objects such as brick blocks, enemies and collectable 
-items. The static environment, such as grass, pipes, and brick blocks are laid out in a grid that covers 
-approximately $19 * 19$ cells.
+is its high-dimensional and rich environment. When a human player views the game, he views a small part of the 
+current level in two dimensions, with the screen centered on Mario. There are very rarely sparse views, in most cases 
+there are dozens of objects such as brick blocks, enemies and collectable items. The static environment, such as grass, 
+pipes, and brick blocks are laid out in a grid that covers approximately $19 * 19$ cells.
 
 The entries for the 2009 Mario AI competition were classified into three broad categories, hard-coded heuristic, 
 learning-based, and A*-based controllers. Hard-coded heuristics were the largest category, comprised of seven 
@@ -87,15 +91,22 @@ controllers were the most successful entries in the competition, beating the oth
 The success of the A*-based controllers over all other categories was considered by those running the competition 
 to be a shortcoming, so in the 2010 Mario AI competition the level generator was expanded to include the possibility 
 of generating dead ends. A dead end is defined as a situation where the player can choose one of two paths when 
-moving forward, but at least one of the paths is blocked. This requires the player to backtrack and choose another 
+moving forward, but at least one of the paths is blocked  
+at a later point out of sight of the player. This requires the player to backtrack and choose another 
 path. Additionally, a number of other changes were made to the level generator in order to create harder levels. 
 Some of the features introduced included greater control over numbers of items, the possibility of hidden blocks, and 
-longer gaps. The difficulty was also increased for the hardest levels and some were literally impossible to finish. This 
+longer gaps that required the player to jump on top of an enemy to traverse. 
+The difficulty was also increased for the hardest levels and some were literally impossible to finish. This 
 allowed for the behaviors of various controllers to be tested in this difficult environment.
 
 The 2010 championship allowed for both new and old competitors to enter, and there was a vast improvement in scores compared to the previous year. Given the changes to the level generator, the second competition allowed for controllers that were not exclusively A*-based to be successful. The 2010 competition consisted of four separate tracks in order to allow for different AI approaches to be more appropriately tested. The \textit {Gameplay track} was the direct continuation of the 2009 Mario AI Competition. In this track the goal for the submitted controllers was to clear as many levels as possible, with the exact same rules. 
 
-The other tracks were the \textit {Learning track}, the \textit {Turing Test track}, and the \textit {Level Generation track}. The \textit {Learning track} was created to better test learning agents, by disadvantaging agents that did not incorporate any learning (online or offline). In this track the agents are tested on level that are unseen during the agent's development, but it is allowed to train on the track 10,000 times. It is only on the $10,001^{th}$ playthrough that the agent is scored. The \textit {Turing Test track} responded to the perceived machinelike quality of the 2009 entries, by asking competitors to submit controllers that behaved in a human-like fashion. This was done by showing non-expert humans both human and agent players and having them vote on whether the player was human or machine. The \textit {Level Generation track} used the Mario AI benchmark software for a content generation competition. Competitors were asked to submit personalized level generators that could produce new, playable levels that were significantly better than the levels generated in the previous years. The level generators were assessed by having humans play a test track followed by levels generated online for them by two level generators, choosing which was the most engaging.
+The other tracks were the \textit {Learning track}, the \textit {Turing Test track}, and the \textit {Level Generation track}. The \textit {Learning track} was created to better test learning agents, by disadvantaging agents that did not incorporate any learning (online or offline). In this track the agents are tested on level that are unseen during the agent's development, but it is allowed to train on the track 10,000 times. It is only on the 10,00$1^{th}$ playthrough that the agent is scored.  
+The organizers of the competition were happy to see that this track was won by learning agents and 
+not an A* agent.  The agents that competed learned behaviors very specific to the level that they 
+were competing in, but they managed to successfully learn (it was not clear after the first competition 
+if this was even possible in the Mario AI benchmark). 
+The \textit {Turing Test track} responded to the perceived machinelike quality of the 2009 entries, by asking competitors to submit controllers that behaved in a human-like fashion. This was done by showing non-expert humans both human and agent players and having them vote on whether the player was human or machine. The \textit {Level Generation track} used the Mario AI benchmark software for a content generation competition. Competitors were asked to submit personalized level generators that could produce new, playable levels that were significantly better than the levels generated in the previous years. The level generators were assessed by having humans play a test track followed by levels generated online for them by two level generators, choosing which was the most engaging.
 
 The winner of the CIG 2010 Mario AI competition, which tested both the \textit {Gameplay track}, the \textit {Learning track}, and the \textit {Level generation track}, was the \textit{REALM} agent, which was built on a set of rules, which were evolved offline to maximize the distance travelled. The consequences of the evolved rules were high level plans which were executed with the help of A* planning.
 
@@ -131,7 +142,7 @@ and if he is carrying a Koopa shell. Functionality for processing a raw bitmap i
     \captionof{figure}{Mario in Small Mode}
 \endgroup
 
-The agent interface was to be implemented with the AI source code and controlled mario in each game. In order to understand the functionality of this interface we 
+The agent interface was to be implemented with the AI source code and controlled Mario in each game. In order to understand the functionality of this interface we 
 must first discuss the functionality of Mario himself. The original Nintendo had six inputs: four directional inputs and two miscellaneous buttons, A and B. 
 In \textit{Super Mario Bros} and consequently in \textit{Infinite Mario Bros}, the ``up" button on the directional pad was not used and its intuitive functionality, 
 the ``jump" command, was assigned to one of the two miscellaneous buttons. The other miscellaneous button was used to activate sprint and fire a fireball 
@@ -231,7 +242,9 @@ case was that the agent would fail to make it over a wall in the environment on 
 left, and then would have to try to jump over the wall again.  In at least one case that was observed the 
 agent failed to ever make it over the wall, and fell into that loop until it timed out.  In other cases the 
 agent was hit by a bullet that was able to catch up to it, the agent jumped into an enemy that it had 
-already passed, and the agent even jumped into gaps that it had already passed.
+already passed, and the agent even jumped into gaps that it had already passed.  Even when the 
+new behavior was not game-ending, jumping backward would lead to longer times to complete levels 
+compared to ForwardJumpingAgent.
 
 Overall, this naive attempt at an improvement was a failure.  We discovered that making ``small'' 
 improvements to an agent can be more difficult than expected.
@@ -250,8 +263,12 @@ did slightly worse than FowardJumpingAgent.
 Watching the agent, the most interesting difference it has when compared to the other agents is 
 that it quickly pushes all of the buttons on and off.  This gives the impression that while evolving 
 the genetic program that there weren't many dominant ways to play.  Generally though, the agent 
-simply moves forward and jumps.  It does appear to do a better job at killing enemies with both 
-fire and by jumping at them.  It has also learned to wait for the piranha plants when they are outside 
+simply moves forward and jumps.  An interesting point is that the agent appears to never crouch, 
+although this was an option during the evolution.  Predictably, crouching would not lead to improved 
+scores as it doesn't help you move through the level.  
+The agent does a better job at killing enemies with both 
+fire and by jumping at them compared to the ForwardJumpingAgent.  
+It has also learned to wait for the piranha plants when they are outside 
 of their pipes.
 
 The main issue faced by this agent is the way that it quickly pushes all of the buttons.  This means that 
@@ -336,8 +353,10 @@ this, and we ultimately abandoned the goal of having Mario avoid gaps.
 
 Just avoiding enemies was enough to lead to an improvement for AmazingAgent.  This is most 
 visible when Mario waits for piranha plants to retreat into their pipes before jumping past them.  
-There was some strange behavior where Mario would refuse to jump past pipes because he believed 
-the piranha plant was still a threat, but we resolved that by making Mario aware of his position.  If 
+In our initial implementations there was some strange behavior 
+where Mario would refuse to jump past pipes because he believed 
+the piranha plant hiding inside was still a threat, 
+but we resolved that by making Mario aware of his position.  If 
 Mario stays in the same position on the x-axis for too long he jumps forward whether or not he believes 
 it's safe.
 
@@ -354,7 +373,8 @@ that you can do in a complex game.
 The second best agent was a rule-based agent created by Trond Ellingsen which he called 
 LuckyAgent.  What is most amazing to us about this agent is how succinct its implementation is.  
 In the ICE-CIG competition the top rule-based agent was created by Sergio Lopez, and was over 
-1000 lines of code.  Ellingsen's agent is only 100 lines and manages to beat all agents outside of the 
+1000 lines of code.  Ellingsen's agent, submitted for CIG, is only 100 lines 
+and manages to beat all agents outside of the 
 A* solutions.  The fact that the logic and strategy for a game as complex as Mario can be captured 
 in only 100 lines is an impressive accomplishment.
 
@@ -411,7 +431,7 @@ https://www.youtube.com/watch?v=j7ckTMLIwpE}
 about Robin Baumgarten's solution, with the belief that 
 he broke the rules or spirit of the competition.  The competition required that Mario only use the 
 Environment interface to observe his surroundings.  He is not supposed to be able to look at the game 
-engine itself to make decisions, as he would then be operating with perfect knowledge.  
+engine itself to make decisions, as he would then be operating with perfect knowledge of the world.  
 Baumgarten's solution gets around this rule by copying over all of the engine code into his own 
 solution.  He then calls his version of the engine a ``simulator,'' and in order to make decisions 
 his agent simulates future states of the world.  This effectively allows his agent to plan for events 
