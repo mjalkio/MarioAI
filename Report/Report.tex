@@ -249,6 +249,114 @@ The unfortunate truth of this agent was that it was the top performing learning 
 we were assessing.  While to a human Mario is a simple game, there are many unique cases 
 encountered that makes it a very hard game for an artificial intelligence agent to learn.
 
+\subsection*{ForwardJumpingAgent}
+This is the most simple agent (but beat two other agents in our set).  
+All it does is run and jump whenever 
+it can.  Surprisingly, this simple heuristic is enough to do fairly well on the benchmark and complete 
+9 levels.  In the first iteration of the competition it came in 5th place out of 11 different agents.
+
+What is interesting is how good this agent appears to a human observer.  Because the agent 
+is able to jump at the soonest possible moment every time, it seems to be acting with a 
+superhuman reaction time.  It does well because jumping in Mario is a very useful ability.  For 
+most enemy types, jumping prevent Mario from being hit and also kill the enemy.  Jumping is the 
+only way for Mario to traverse gaps.  It's also his only way to get over walls.  In the early levels that 
+most of our agents are successful in, there are more safe spaces than danger zones, so just 
+jumping quickly through the levels works.
+
+Something that is noteworthy is ForwardJumpingAgent's lack of desire to acquire power ups.  There 
+are many situations where this agent could have benefitted from waiting for a mushroom power up, or 
+from backtracking and picking up a fire flower.  However, it always keeps running forward, and this 
+sometimes leads it to die.
+
+On the more difficult levels the spiny koopas become a major issue for ForwardJumpingAgent.  
+Landing on top of these koopas hurts Mario, so jumping becomes worse.  There are also more gaps 
+on the difficult levels for Mario to fall into.  Occasionally, Mario will have a moment of divine 
+intervention where he dodges every gap, stomps a large number of enemies, and progresses far 
+on a very difficult level.  However, this never lasts long enough to complete the longer levels.
+
+ForwardJumpingAgent is a fantastic benchmark agent, and can certainly out-perform many 
+human players of the game.  However, it isn't able to compete with the more sophisticated agents 
+that were present in the competition.
+
+\subsection*{AmazingAgent}
+AmazingAgent is the rule-based agent that we created for this paper.  The idea was to start with 
+ForwardJumpingAgent, find the situations that it failed the most frequently on, and then create 
+an agent that would handle those cases more elegantly.  It did outperform ForwardJumpingAgent, 
+completing one more level (for a total of 10 completed levels) and consistently traveled a further 
+distance on all levels.  It was also a better killer than ForwardJumpingAgent, but that may have 
+been a side-effect of progressing further.
+
+There were a few things we disliked about ForwardJumpingAgent that we wanted to fix.  The 
+first was that because it was always jumping, it would frequently jump into enemies that were above 
+it.  The second was that it would jump into gaps in the environment.  The final thing was that always 
+running right would sometimes cause the agent to run right into an enemy.  We thought that fixing these 
+three major problems could lead to a big improvement.
+
+AmazingAgent starts by getting the enemy observation data along with its own position.  If there is 
+an enemy above and in front of Mario, it runs right without jumping.  If there is an enemy, it stops 
+moving right and just jumps up (with the hope that it will land on top of the enemy).  Otherwise, 
+it just runs and jumps in the same way as FowardJumpingAgent.
+
+Unfortunately, we found that writing logic to avoid jumping in gaps was very difficult.  The main 
+problem is that there are a number of corner cases that need to be handled.  The simple logic would 
+be ``if you are at a jump's distance from a gap, run towards it.  Then jump once you are closer.''  
+However, this doesn't always work.  For example, take the following situation:
+\begin{center}
+\includegraphics[scale=0.6]{gap_issue}
+\end{center}
+In this case, Mario is at a distance where jumping could lead him to jump into the gap.  However, 
+he needs to jump in order to get on top of the wall.  There are a number of situations similar to 
+this, and we ultimately abandoned the goal of having Mario avoid gaps.
+
+Just avoiding enemies was enough to lead to an improvement for AmazingAgent.  This is most 
+visible when Mario waits for piranha plants to retreat into their pipes before jumping past them.  
+There was some strange behavior where Mario would refuse to jump past pipes because he believed 
+the piranha plant was still a threat, but we resolved that by making Mario aware of his position.  If 
+Mario stays in the same position on the x-axis for too long he jumps forward whether or not he believes 
+it's safe.
+
+The only downside to this agent is that sometimes not jumping when an enemy is above backfires.  
+We observed multiple situations where waiting led Mario to be hit by a bullet which came from behind 
+him.  There were other situations where Mario was waiting for an enemy on a ledge above him, and 
+the enemy simple walked down and fell on top of Mario.
+
+We were very satisfied with this agent, which would have come in fifth place out of twelve in the 
+first iteration of the Mario AI competition.  It has very simple behavior, but sometimes that's the best 
+that you can do in a complex game.
+
+\subsection*{Ruled-Based Agent}
+The second best agent was a rule-based agent created by Trond Ellingsen which he called 
+LuckyAgent.  What is most amazing to us about this agent is how succinct its implementation is.  
+In the ICE-CIG competition the top rule-based agent was created by Sergio Lopez, and was over 
+1000 lines of code.  Ellingsen's agent is only 100 lines and manages to beat all agents outside of the 
+A* solutions.  The fact that the logic and strategy for a game as complex as Mario can be captured 
+in only 100 lines is an impressive accomplishment.
+
+LuckyAgent's methodology is to calculate what is nearby, and then to make appropriate jumps.  It takes 
+into consideration Mario's speed, his distance from gaps or enemies, and whether or not he's 
+currently jumping.  It also does some cool things such as always jumping the correct amount to 
+get over a wall (so it makes small jumps to get up the stone steps that are frequent in the game).  
+LuckyAgent is also a great killer because it always tries to time jumps so that it lands 
+on top of enemies.  It only beats two levels more than the AmazingAgent, but defeats almost three 
+times as many enemies in that time.  Although it can't beat the harder levels, it gets consistently further 
+than the lower ranked agents.
+
+When you watch LuckyAgent it does some interesting things that no other agents do.  For example, 
+unless it sees an enemy or gap in the distance it will wait until it runs into a wall to jump over it.  
+It also sometimes slows down before a gap and waits until it's close to jump over it.  This makes it 
+appear to play levels more ``safely'' than the other agents in the competition.  It also never breaks 
+bricks which is interesting, it doesn't seem to think they're worthy of jumps.  Similar to the other agents, 
+it does not go after power ups which seems like an oversight.  The most impressive thing that 
+LuckyAgent does is jump on pipes when the piranha plant is also on it.  It jumps just barely onto the 
+edge so it's not touching the piranha plant, and will then jump up and over it.
+
+The agent faces many of the same issues as other agents.  Bullets from behind sneak up on it.  It 
+will also sometimes wait under a ledge and let an enemy fall on top of itself.  LuckyAgent doesn't seem 
+to differentiate between spiny koopas and regular koopas and goombas, so it will jump on top of them.  
+This agent is impressive, but perhaps it would benefit from some additional logic.
+
+\subsection*{A* Agent}
+
 \end{multicols*}
 
 \end{document}

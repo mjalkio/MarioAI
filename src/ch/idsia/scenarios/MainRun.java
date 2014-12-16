@@ -63,11 +63,11 @@ public class MainRun {
 			// to the name of desired agent.
 			calledBefore = true;
 			// addAgentToThePool
-			AgentsPool.addAgent(new AmazingAgent());
 			AgentsPool.addAgent(new ForwardJumpingAgent());
 			AgentsPool.addAgent(new ForwardJumpingAgent2());
 			AgentsPool
 					.addAgent("/Users/michael/Documents/Eclipse/MarioAI/src/competition/cig/matthewerickson/matthewerickson.xml");
+			AgentsPool.addAgent(new AmazingAgent());
 			AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
 			AgentsPool.addAgent(new AStarAgent());
 		}
