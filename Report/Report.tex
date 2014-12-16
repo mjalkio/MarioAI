@@ -26,7 +26,7 @@
 This paper utilizes the Mario AI benchmark, to describe the success of both previously implemented Mario bots compared to our own implementation. The Mario AI Benchmark was introduced for use first in the IEEE Games Innovation Conference (ICE-GIC) and then later in Computational Intelligence Games (CIG) as a benchmark for reinforcement learning algorithms and other game AI techniques in a public domain clone of the platform game {\it Super Mario Bros}. Each year the CIG conducts a Mario AI Competition, in which they compare contestants submitted Mario bots to this benchmark. The goal of this paper is to determine the success of bots that were already created for this competition and then to decide whether an improved bot can be created. The bots that will be evaluated fell into three categories in the competitions A*-based, learning-based, and rule-based implementations.
 
 \setlength{\columnsep}{.65cm}
-\begin{multicols*}{2}
+\begin{multicols}{2}
 \section * {Introduction}
 A platform game, or platformer, is a video game which involves guiding an avatar to jump between suspended 
 platforms, over obstacles, or both in order to advance the game. These challenges are known as jumping puzzles 
@@ -64,8 +64,25 @@ approximately $19 * 19$ cells.
 
 The entries for the 2009 Mario AI competition were classified into three broad categories, hard-coded heuristic, 
 learning-based, and A*-based controllers. Hard-coded heuristics were the largest category, comprised of seven 
-different controllers which were hand-constructed, non-adaptive, and did not use search-based methods for action selection. Learning based controllers were the second largest category comprised of two subcategories artificial evolution. There were three entries, the first used expression trees commonly used in genetic programming, the second evolved code for a stack-based virtual machine, and the third evolved a rule-based controller. The A*-based controllers were the most successful entries in the competition.
-\end{multicols*}
+different controllers which were hand-constructed, non-adaptive, and did not use search-based methods for action selection. Learning based controllers were the second largest category comprised of two subcategories artificial evolution. There were three entries, the first used expression trees commonly used in genetic programming, the second evolved code for a stack-based virtual machine, and the third evolved a rule-based controller. The A*-based controllers were the most successful entries in the competition
+
+\section * {Analysis of Agents}
+We analyzed six different agents for this paper.  The first is the basic ForwardJumpingAgent which 
+was a sample agent provided by the benchmark.  Three of the agents are the best agents within
+their respective categories that were submitted 
+for the CIG iteration of the competition.  There's one A* agent, one hard-coded rule based agent, and 
+one learning agent.  Finally, we looked at two agents that we created.  The first was an attempt at a 
+small improvement to the ForwardJumpingAgent that would jump out of holes when it fell in.  
+The second was our own very simple rule based agent.
+
+The analysis consisted of running the agents on 40 different levels.  They played 10 levels each 
+on difficulties 0, 3, 5, and 10.  Each level within the set of 10 was progressively longer.  We analyzed 
+the agents both quantitatively and qualitatively.  The quantitative analysis was the scoring system 
+used in the competition.  It put the largest emphasis on the distance traveled, but also considers 
+kills, Mario's mode (fire, large, small), time taken, and number of levels completed.  The qualitative 
+analysis was simply watching the algorithms run through the levels and seeing if we could identify 
+situations that they do not perform well in.  A table of our quantitative results is below:
+\end{multicols}
 
 \begin{center}
 \begin{table}[h]
@@ -86,5 +103,14 @@ Amazing    & 11267.4 & 3103.8  & 2742.0  & 1199.3  & 18312.6 & 83          & 10 
 \vspace{-3ex}
 \textsc{\scriptsize Results of our run of the various bots against our own controller titled amazing agent. explanation of column labels: fj: forward jumping, gp: genetic programming, rb: rule-base, A*: a-star search, amazing: our implemented agent (amazing agent), D0...D5: score at difficulty 0...5 respectively based on progress, score: sum of all the difficulties, mario status: number of levels completed, time left: sum of time remaining after each level, mario mode: sum of abilities that mario has at the end of each level, total: total score based on progress, kills, and time taken (used to calculate winner)}
 \end{center}
+
+\begin{multicols*}{2}
+We will analyze the agents in the order of their score from the worst to the best.
+\subsection*{ForwardJumpingAgent2}
+The goal of ForwardJumpingAgent2 was to solve a problem faced by the original 
+ForwardJumpingAgent: falling into holes.  In this version of Mario it is possible to jump off of walls, 
+so in some situations when you're falling down a hole it's possible to to within the hole and free 
+yourself.
+\end{multicols*}
 
 \end{document}
