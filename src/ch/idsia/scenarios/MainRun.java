@@ -4,7 +4,6 @@ import java.util.List;
 
 import ch.idsia.ai.agents.Agent;
 import ch.idsia.ai.agents.AgentsPool;
-import ch.idsia.ai.agents.ai.ForwardJumpingAgent;
 import ch.idsia.ai.agents.ai.TimingAgent;
 //import ch.idsia.ai.agents.icegic.robin.AStarAgent;
 //import ch.idsia.ai.agents.icegic.peterlawford.SlowAgent;
@@ -14,11 +13,7 @@ import ch.idsia.tools.EvaluationOptions;
 import ch.idsia.tools.Evaluator;
 import ch.idsia.utils.StatisticalSummary;
 
-import competition.cig.andysloane.AndySloane_BestFirstAgent;
 import competition.cig.robinbaumgarten.AStarAgent;
-import competition.cig.trondellingsen.TrondEllingsen_LuckyAgent;
-import competition.cs4701.AmazingAgent;
-import competition.cs4701.ForwardJumpingAgent2;
 
 /**
  * Created by IntelliJ IDEA. User: Sergey Karakovskiy, firstName_at_idsia_dot_ch
@@ -64,13 +59,13 @@ public class MainRun {
 			// to the name of desired agent.
 			calledBefore = true;
 			// addAgentToThePool
-			AgentsPool.addAgent(new ForwardJumpingAgent());
-			AgentsPool.addAgent(new ForwardJumpingAgent2());
-			AgentsPool
-					.addAgent("/Users/michael/Documents/Eclipse/MarioAI/src/competition/cig/matthewerickson/matthewerickson.xml");
-			AgentsPool.addAgent(new AmazingAgent());
-			AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
-			AgentsPool.addAgent(new AndySloane_BestFirstAgent());
+			// AgentsPool.addAgent(new ForwardJumpingAgent());
+			// AgentsPool.addAgent(new ForwardJumpingAgent2());
+			// AgentsPool
+			// .addAgent("/Users/michael/Documents/Eclipse/MarioAI/src/competition/cig/matthewerickson/matthewerickson.xml");
+			// AgentsPool.addAgent(new AmazingAgent());
+			// AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
+			// AgentsPool.addAgent(new AndySloane_BestFirstAgent());
 			AgentsPool.addAgent(new AStarAgent());
 		}
 	}
@@ -99,11 +94,11 @@ public class MainRun {
 		timeLeftSum = 0;
 		marioModeSum = 0;
 
-		competitionScore += testConfig(controller, options, startingSeed, 0,
+		competitionScore += testConfig(controller, options, startingSeed, 10,
 				false);
-		competitionScore += testConfig(controller, options, startingSeed, 3,
+		competitionScore += testConfig(controller, options, startingSeed, 10,
 				false);
-		competitionScore += testConfig(controller, options, startingSeed, 5,
+		competitionScore += testConfig(controller, options, startingSeed, 10,
 				false);
 		competitionScore += testConfig(controller, options, startingSeed, 10,
 				false);
