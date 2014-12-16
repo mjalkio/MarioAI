@@ -4,7 +4,7 @@
 \pdfpageheight 11.0in
 \textheight 9.7in
 \usepackage{color} %used for font color
-\usepackage{amssymb, amsmath, multirow, commath, inputenc, titling, epic, paralist, graphicx, algorithm,algorithmic, tikz, xcolor,colortbl, environ, quoting, ragged2e, lipsum, caption}
+\usepackage{amssymb, amsmath, multirow, commath, inputenc, titling, epic, paralist, graphicx, algorithm,algorithmic, tikz, xcolor,colortbl, environ, quoting, ragged2e, lipsum, caption, capt-of}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
@@ -125,14 +125,30 @@ can be killed by fireballs and can be jumped on are all classified the same) and
 Finally, the environment interface contained information about Mario's current state, including his mode (small, big, or fire), if he is on the ground, if he can jump, 
 and if he is carrying a Koopa shell. Functionality for processing a raw bitmap image of the screen at each discrete time step was implemented but was not used by any AI routine.
 
+\begingroup
+    \centering
+    \includegraphics[width=0.4\textwidth]{Small}
+    \captionof{figure}{Mario in Small Mode}
+\endgroup
+
 The agent interface was to be implemented with the AI source code and controlled mario in each game. In order to understand the functionality of this interface we 
 must first discuss the functionality of Mario himself. The original Nintendo had six inputs: four directional inputs and two miscellaneous buttons, A and B. 
 In \textit{Super Mario Bros} and consequently in \textit{Infinite Mario Bros}, the ``up" button on the directional pad was not used and its intuitive functionality, 
 the ``jump" command, was assigned to one of the two miscellaneous buttons. The other miscellaneous button was used to activate sprint and fire a fireball 
 when Mario was in fire mode. The left and right directions on the directional pad move Mario left and right respectively, and the down button on the directional 
 pad makes him crouch down. 
+\hspace{5mm}
+\\
 
-The agent interface calls the method \textit{getAction} at every discrete time step, in the case of simulated time every 40ms. 
+\begingroup
+    \centering
+    \includegraphics[width=0.4\textwidth]{Fire}
+    \captionof{figure}{Mario Using a Fireball}
+\endgroup
+
+\hspace{5mm}
+\\
+\indent The agent interface calls the method \textit{getAction} at every discrete time step, in the case of simulated time every 40ms. 
 The method takes an environment as input (the current game environment) and returns a  five-bit array of actions, one for each of the 
 five used buttons as ``pressed" or ``not pressed". Buttons may be pressed simultaneously pressed, so there are therefore \(2^5 = 32\) 
 actions that may be taken by the agent. While several of the elements in action space are pointless, not used, or rarely used (such as 
@@ -303,9 +319,17 @@ Unfortunately, we found that writing logic to avoid jumping in gaps was very dif
 problem is that there are a number of corner cases that need to be handled.  The simple logic would 
 be ``if you are at a jump's distance from a gap, run towards it.  Then jump once you are closer.''  
 However, this doesn't always work.  For example, take the following situation:
-\begin{center}
-\includegraphics[scale=0.6]{gap_issue}
-\end{center}
+\hspace{5mm}
+\\
+
+\begingroup
+    \centering
+    \includegraphics[width=0.4\textwidth]{gap_issue}
+    \captionof{figure}{Mario Needs to Jump}
+\endgroup
+
+\hspace{5mm}
+\\
 In this case, Mario is at a distance where jumping could lead him to jump into the gap.  However, 
 he needs to jump in order to get on top of the wall.  There are a number of situations similar to 
 this, and we ultimately abandoned the goal of having Mario avoid gaps.
@@ -364,8 +388,18 @@ and navigates each level like as if the obstacles are not even present.  Baumgar
 so perfect that a video of it went viral on YouTube\footnote{
 https://www.youtube.com/watch?v=DlkMs4ZHHr8}, and was a major reason that the 
 Mario AI Competition became known.
+\hspace{5mm}
+\\
 
-The reason it's able to do this is the nature of the Mario game.  There are not any random factors in 
+\begingroup
+    \centering
+    \includegraphics[width=0.4\textwidth]{Phased?}
+    \captionof{figure}{A* Not Even Phased}
+\endgroup
+
+\hspace{5mm}
+\\
+\indent The reason it's able to do this is the nature of the Mario game.  There are not any random factors in 
 Mario, so for any given screen there are a number of safe paths forward.  In this case, A* search 
 looks at these possible paths, and then picks the one which allows Mario to travel right in the shortest 
 distance.  The real difficulty is being able to properly simulate the mechanics of the game, which is 
