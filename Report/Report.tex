@@ -5,6 +5,8 @@
 \textheight 9.7in
 \usepackage{color} %used for font color
 \usepackage{amssymb, amsmath, multirow, commath, inputenc, titling, epic, paralist, graphicx, algorithm,algorithmic, tikz, xcolor,colortbl, environ, quoting, ragged2e, lipsum, caption}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \usepackage{sectsty}
 \usepackage{multicol}
@@ -21,6 +23,9 @@
 \date{}
 
 \maketitle
+\begin{center}
+\includegraphics[width=0.65\textwidth]{waste_of_space} 
+\end{center}
 
 \section * {Abstract}
 This paper utilizes the Mario AI benchmark, to describe the success of both previously implemented Mario bots 
