@@ -4,7 +4,7 @@
 \pdfpageheight 11.0in
 \textheight 9.7in
 \usepackage{color} %used for font color
-\usepackage{amssymb, amsmath, multirow, commath, inputenc, titling, epic, paralist, graphicx, algorithm,algorithmic, tikz, xcolor,colortbl, environ, quoting, ragged2e, lipsum}
+\usepackage{amssymb, amsmath, multirow, commath, inputenc, titling, epic, paralist, graphicx, algorithm,algorithmic, tikz, xcolor,colortbl, environ, quoting, ragged2e, lipsum, caption}
 
 \usepackage{sectsty}
 \usepackage{multicol}
@@ -67,8 +67,8 @@ learning-based, and A*-based controllers. Hard-coded heuristics were the largest
 different controllers which were hand-constructed, non-adaptive, and did not use search-based methods for action selection. Learning based controllers were the second largest category comprised of two subcategories artificial evolution. There were three entries, the first used genetic programming, the second evolved code for a stack-based virtual machine, and the third evolved a rule-based controller. 
 \end{multicols*}
 
+\begin{center}
 \begin{table}[h]
-\centering
 \resizebox{\textwidth}{!}{ 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -81,8 +81,10 @@ A*         & 11628.8 & 11611.2 & 11651.2 & 11619.2 & 46510.4 & 414         & 40 
 Amazing    & 11267.4 & 3103.8  & 2742.0  & 1199.3  & 18312.6 & 83          & 10           & 6035      & 21         & 24461.6   \\ \hline
 \end{tabular}
 }
-\caption{Controller Scores}
+\caption*{\footnotesize Controller Scores}
 \end{table}
-Results of our run of the various bots and the 
+\vspace{-3ex}
+\textsc{\scriptsize Results of our run of the various bots against our own controller titled amazing agent. explanation of column labels: fj: forward jumping, gp: genetic programming, rb: rule-base, A*: a-star search, amazing: our implemented agent (amazing agent), D0...D5: score at difficulty 0...5 respectively based on progress, score: sum of all the difficulties, mario status: number of levels completed, time left: sum of time remaining after each level, mario mode: sum of abilities that mario has at the end of each level, total: total score based on progress, kills, and time taken (used to calculate winner)}
+\end{center}
 
 \end{document}
