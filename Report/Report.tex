@@ -163,6 +163,38 @@ already passed, and the agent even jumped into gaps that it had already passed.
 
 Overall, this naive attempt at an improvement was a failure.  We discovered that making ``small'' 
 improvements to an agent can be more difficult than expected.
+
+\subsection*{Genetic Programming Agent}
+The second worst agent was a genetic programming agent created by Matthew Erickson.  
+The agent used function detectors which were written by him, and the terminal nodes are a 
+collection of four values.  The four values say whether the agent should go left or right, 
+press jump or not, and press down or not.  He used a population of size 500 with 90\% 
+crossbreeding, 9\% cloning and 1\% mutation.
+
+The agent managed to complete 10 levels, which was better than either of the forward jumping 
+agents.  However, it had very poor performance when the difficulty was 5 and 10.  Overall, it only 
+did slightly worse than FowardJumpingAgent.
+
+Watching the agent, the most interesting difference it has when compared to the other agents is 
+that it quickly pushes all of the buttons on and off.  This gives the impression that while evolving 
+the genetic program that there weren't many dominant ways to play.  Generally though, the agent 
+simply moves forward and jumps.  It does appear to do a better job at killing enemies with both 
+fire and by jumping at them.  It has also learned to wait for the piranha plants when they are outside 
+of their pipes.
+
+The main issue faced by this agent is the way that it quickly pushes all of the buttons.  This means that 
+it never holds down the jump button, and can't jump over large walls or gaps.  Overall the agent 
+doesn't seem to have to learned how to deal with gaps in the environment.  This is explainable, there 
+are a large number of different gaps possible in Mario.  However, in most cases just jumping frequently 
+works well.    Jumping kills enemies, gets over gaps, and allows you to traverse walls.  
+The genetic program didn't have enough knowledge to assess why certain strategies 
+worked and did not work in given situations, it just evaluated the fitness of different programs.  
+Therefore, it only learned that jumping a lot was good.
+
+The unfortunate truth of this agent was that it was the top performing learning agent in the competition 
+we were assessing.  While to a human Mario is a simple game, there are many unique cases 
+encountered that makes it a very hard game for an artificial intelligence agent to learn.
+
 \end{multicols*}
 
 \end{document}
