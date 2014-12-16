@@ -358,6 +358,37 @@ to differentiate between spiny koopas and regular koopas and goombas, so it will
 This agent is impressive, but perhaps it would benefit from some additional logic.
 
 \subsection*{A* Agent}
+The true champion of the competition is Robin Baumgarten's A* search agent.  It was the only agent 
+to clear all 40 levels in the benchmark, and it completes them with style.  It's never hit by an enemy, 
+and navigates each level like as if the obstacles are not even present.  Baumgarten's solution is 
+so perfect that a video of it went viral on YouTube\footnote{
+https://www.youtube.com/watch?v=DlkMs4ZHHr8}, and was a major reason that the 
+Mario AI Competition became known.
+
+The reason it's able to do this is the nature of the Mario game.  There are not any random factors in 
+Mario, so for any given screen there are a number of safe paths forward.  In this case, A* search 
+looks at these possible paths, and then picks the one which allows Mario to travel right in the shortest 
+distance.  The real difficulty is being able to properly simulate the mechanics of the game, which is 
+not something that the benchmark program provides.  However, because all of the code is open source 
+it's doable.
+
+There have been some complaints online\footnote{
+https://www.youtube.com/watch?v=j7ckTMLIwpE} 
+about Robin Baumgarten's solution, with the belief that 
+he broke the rules or spirit of the competition.  The competition required that Mario only use the 
+Environment object to observe his surroundings.  He is not supposed to be able to look at the game 
+engine itself to make decisions, as he would then be operating with perfect knowledge.  
+Baumgarten's solution gets around this rule by copying over all of the engine code into his own 
+solution.  He then calls his version of the engine a ``simulator,'' and in order to make decisions 
+his agent simulates future states of the world.  This effectively allows his agent to plan for events 
+before they occur, and gives it an unfair advantage.  It's unclear whether this should have been 
+disallowed, but it is a big reason that Baumgarten's A* agent is so perfect.
+
+Another  top A* solution submitted by Andy Sloane does very well on the benchmark, 
+but still fails to complete 
+two levels.  Occasional mistakes should almost be expected in such a complex game, but 
+Baumgarten's agent does not make them!  It really goes to show that fairly basic search algorithms 
+can be applied to a variety of situations.
 
 \end{multicols*}
 

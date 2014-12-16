@@ -14,6 +14,7 @@ import ch.idsia.tools.EvaluationOptions;
 import ch.idsia.tools.Evaluator;
 import ch.idsia.utils.StatisticalSummary;
 
+import competition.cig.andysloane.AndySloane_BestFirstAgent;
 import competition.cig.robinbaumgarten.AStarAgent;
 import competition.cig.trondellingsen.TrondEllingsen_LuckyAgent;
 import competition.cs4701.AmazingAgent;
@@ -69,6 +70,7 @@ public class MainRun {
 					.addAgent("/Users/michael/Documents/Eclipse/MarioAI/src/competition/cig/matthewerickson/matthewerickson.xml");
 			AgentsPool.addAgent(new AmazingAgent());
 			AgentsPool.addAgent(new TrondEllingsen_LuckyAgent());
+			AgentsPool.addAgent(new AndySloane_BestFirstAgent());
 			AgentsPool.addAgent(new AStarAgent());
 		}
 	}
